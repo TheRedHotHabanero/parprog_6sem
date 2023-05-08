@@ -10,5 +10,5 @@
 ### 2 Task - Summ
 <image src="screenshots/2.png">
 
-### 3 Task - Circle Send
+### 3 Task - Cell Send
 <image src="screenshots/3.png">
