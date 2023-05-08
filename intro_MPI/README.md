@@ -4,7 +4,6 @@
 [См главную ридмишку](../README.md)
 
 ## Скриншоты запуска
-
-<image src="screenshots/1_hello.png" alt="1 Task - Hello world">
-<image src="screenshots/2_summ" alt="2 Task - Summ">
-<image src="screenshots/3_circle_send" alt="3 Task - Circle Send">
+![1 Task - Hello world](/screenshots/1.png)
+![2 Task - Summ](/screenshots/2.png)
+![3 Task - Circle Send](/screenshots/3.png)
