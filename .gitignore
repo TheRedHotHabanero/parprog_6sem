@@ -1,3 +1,7 @@
 intro_MPI/hello
 intro_MPI/summ
 intro_MPI/circle
+intro_threads/hello
+intro_threads/summ
+intro_threads/cell
+.vscode/
