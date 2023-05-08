@@ -9,8 +9,7 @@ int N;
 int message = 0;
 pthread_mutex_t pthread_mut = PTHREAD_MUTEX_INITIALIZER;
 
-void *send_circle(void *self_num)
-{
+void *send_circle(void *self_num) {
     std::ostringstream output;
     output << "Thread " << *(int *)(self_num) << ", message ";
 
