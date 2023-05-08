@@ -20,3 +20,19 @@
 # Лабораторная работа №2
 * [Условие](https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2FWWP6MJYY23lknWYddiCjug8F2Ir9qyNSu57Ba5zP2OUR%2F%2FW55cFQjKU7UcdCNOWSRmR%2F0fePyGwwW%2FWKW0%2FCEA%3D%3D%3A%2F%D0%97%D0%B0%D0%B4%D0%B0%D1%87%D0%B0_%D0%B8%D0%BD%D1%82%D0%B5%D0%B3%D1%80%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_%D0%B22023.pdf&name=%D0%97%D0%B0%D0%B4%D0%B0%D1%87%D0%B0_%D0%B8%D0%BD%D1%82%D0%B5%D0%B3%D1%80%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_%D0%B22023.pdf)
 * [Папка с выполнением](/2_lab/)
+
+# Как запустить сие добро
+* Установить mpitch на Ubuntu: 
+```
+sudo apt install mpich
+```
+
+* Переходим к нужному файлу и компилим
+```
+cd <путь>/<до>/<папки с файлами,>/<например,>/intro_MPI
+mpicc <имя входного файла>.c -o <имя выходного файла>
+```
+* Запуск
+```
+mpirun -np <количество процессов> ./<имя выходного файла>
+```
