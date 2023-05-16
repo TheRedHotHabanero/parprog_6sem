@@ -1,43 +1,44 @@
 import numpy as np
-import matplotlib.pyplot as plt
-import pandas as pd
+from matplotlib import pyplot as plt
+from pathlib import Path
 from mpl_toolkits.mplot3d import Axes3D
 
-data = pd.read_csv("result.csv", sep=" ")
-data.sort_values(by='x', inplace=True)
+file = Path("result.dat")
 
-# Извлечение координат и значений функции u
-x = np.array(data.iloc[:-1, 0].tolist())
-t = np.array(data.iloc[:-1, 1].tolist())
-u = np.array(data.iloc[:-1, 2].tolist())
+params = {
+"tau": 0,
+"h": 0,
+"T": 0,
+"X": 0,
+"M": 0,
+"K": 0
+}
+vals = []
 
-# Извлечение размерности сетки
-N = int(len(x) - 1)
-M = int(len(t) / (N+1))
-assert len(t) == M * (N+1)
+with open(file) as f:
+    for line in f:
+        line = line.split()
+        name = line[0]
+        if name[:-1] in params.keys():
+            params[name[:-1]] = float(line[1])
+        else:
+            vals.append(float(name))
+      
+U = np.zeros((int(params['K']), int(params['M'])))
+for i in range(U.shape[0]):
+    for j in range(U.shape[1]):
+        U[i][j] = vals[i * U.shape[1] + j]
 
-def plot():
-    # Построение трехмерного графика
-    fig = plt.figure(figsize=[16,18])
-    ax = fig.add_subplot(111, projection ='3d')
+X = np.array([k * params['h'] for k in range(U.shape[1])])
+T = np.array([k * params['tau'] for k in range(U.shape[0])])
 
-    im = ax.scatter(x, t, u, cmap='coolwarm', c = u)
-    #im = ax.plot_surface(x, t, U, cmap='coolwarm', c = u)
-    cbar = fig.colorbar(im, orientation='vertical')
-
-    ax.set_xlabel("x")
-    ax.set_ylabel("t")
-    ax.set_zlabel("u")
-
-    ax.set_xlim([0, 1])
-    ax.set_ylim([0, 1])
-    ax.set_zlim([-1,1.5])
-
-    plt.title("График последовательного решения")
-    plt.show()
-
-def main():
-    plot()
-
-if __name__ == '__main__':
-    main()
+X, T = np.meshgrid(X, T)
+fg = plt.figure(figsize=(22, 15))
+ax = Axes3D(fg)
+ax = fg.add_subplot(111, projection='3d')
+ax.plot_surface(X, T, U, cmap='plasma')
+ax.set_xlabel("$x$", fontsize=25)
+ax.set_ylabel("$t$", fontsize=25)
+ax.set_zlabel("$u(x, t)$", fontsize=25)
+plt.savefig("result.png")
+plt.show()
