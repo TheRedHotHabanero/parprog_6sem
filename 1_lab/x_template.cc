@@ -33,33 +33,6 @@ constexpr double tau = 0.001;
 constexpr size_t K = T / tau;
 constexpr size_t M = X / h;
 
-/**
- * Worker created for each process
- * 
- * For each process allocated array named values_, that aim is to store its part of the calculations
- * 
- * In root_process result_values_ is allocated to gather all work (in the form of values_) 
- * from every proccess after main algorithms is ends
- * 
- * Description of the algorithm:
- * 
- * Firstly we need to fill initial conditions using functions psi and phi
- * The 2 step with the use of the rectangle method is to fill in the second layer
- * We use the rectangle in order not to lose the accuracy of the Cross algorithm
- * 
- * 0 0 0 0 0   (1)   + 0 0 0 0   (2)   + 0 0 0 0
- * 0 0 0 0 0  ---->  + 0 0 0 0  ---->  + 0 0 0 0 
- * 0 0 0 0 0         + 0 0 0 0         + + + + +
- * 0 0 0 0 0         + + + + +         + + + + +
- * 
- * Now let's take a closer look at the parallelization algorithm:
- * 
- * The algorithm consists in splitting the field into n equal parts, where n is the number of processes
- * The problem of Cross is that in boundary parts we cant calculate values. Suggestion sulution is to 
- * use Bsend to send left and rigth boundary value of process k. And in the last worker last boundary 
- * value is calculating by rectangle method
-*/
-
 class Worker {
 public:
     Worker(int rank, int commsize) {
@@ -108,13 +81,6 @@ private:
     double* result_values_ {nullptr};
 
     void CalculateStartAndEndPos();
-    /**   Example for M = 5
-     *
-     *    [0, 2), [2, 4), [4, 5)
-     *     |                  |
-     *     start_pos          end_pos
-     *   
-    **/
 };
 
 
