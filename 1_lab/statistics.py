@@ -40,9 +40,9 @@ T0 = T_vals[0]
 S = T0 / T_vals
 E = S / p
 
-plt.figure(figsize=[18, 10])
+plt.figure(figsize=[15, 15])
 plt.title('Зависимость ускорения от числа процессов, X = ' + str(X_param) + ', T = ' + str(T_param))
-plt.plot(p, S)
+plt.plot(p, S, linestyle='-', marker='o', color='k', markerfacecolor='#ff22aa')
 plt.xlabel("p")
 plt.ylabel("S")
 plt.grid()
